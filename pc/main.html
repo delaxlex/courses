@@ -30,7 +30,15 @@
     <div id="app-content" style="display: none;">
         <div class="app">
             <!-- Левая панель с уроками -->
-            <nav class="sidebar">
+            <nav class="sidebar" id="sidebar">
+                <!-- Кнопка закрытия панели -->
+                <button class="sidebar-toggle sidebar-close" id="sidebarClose" aria-label="Закрыть панель">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+
                 <div class="sidebar-header">
                     <h2>📚 Уроки</h2>
                     <p class="subtitle">Выберите раздел</p>
@@ -63,7 +71,16 @@
             </nav>
 
             <!-- Правая панель с контентом -->
-            <main class="content">
+            <main class="content" id="mainContent">
+                <!-- Кнопка открытия панели (показывается когда панель скрыта) -->
+                <button class="sidebar-toggle sidebar-open" id="sidebarOpen" aria-label="Открыть панель">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+
                 <!-- Блоки с материалами -->
                 <div class="lesson-content" id="lesson-0">
                     <h1>📄 Титульный лист</h1>
@@ -138,7 +155,7 @@
                                 <div class="image-left-col">
                                     <a href="https://drive.google.com/file/d/1scUR7OpqvZiw3YoZQp2AtQ9BzzQKiU8k/view"
                                         target="_blank">
-                                        <img src="1-1.png" alt="урок 1-1">
+                                        <img src="pictures/1-1.png" alt="урок 1-1">
                                     </a>
                                     <p>Теория бухучета</p>
                                 </div>
@@ -157,7 +174,7 @@
                                 <div class="image-left-col">
                                     <a href="https://drive.google.com/file/d/1R4YIk7aO7B6bHS-Hqjo0nMA4OkUD067t/view"
                                         target="_blank">
-                                        <img src="1-2.png" alt="урок 1-2">
+                                        <img src="pictures/1-2.png" alt="урок 1-2">
                                     </a>
                                 </div>
                                 <div class="text-right-col">
@@ -171,9 +188,9 @@
                                 <div class="image-left-col">
                                     <a href="https://drive.google.com/file/d/1Tri1uYamEheQux92Gq119Y45MyG7xJGl/view"
                                         target="_blank">
-                                        <img src="1-3.png" alt="урок 1-2">
+                                        <img src="pictures/1-3.png" alt="урок 1-2">
                                     </a>
-                                    <p>Самостаятельная работа</p>
+                                    <p>Самостоятельная работа</p>
                                 </div>
                                 <div class="text-right-col">
                                     <p>Урок 1-3 самостоятельная работа, первое задание делаем вместе, потом пытаемся сделать самостоятельно, затем проверяем.</p>
@@ -186,7 +203,7 @@
                         </div>
                         <hr style="height: 4px; border: none; background-color: gray;">
                         <p style="font-size: 30px !important; color: red;">Поздравляю!!! </p>
-                            <p>Вы закончили первый урок, если у Вас так же, как у нас переходите смело ко второму уроку.</p>
+                            <p>Вы закончили первый урок, если у Вас так же, как у нас, переходите смело ко второму уроку.</p>
 
 
                     </div>
@@ -284,10 +301,13 @@
                     </div>
                 </div>
             </main>
+            
         </div>
     </div>
 
     <script src="script.js"></script>
+
+
 </body>
 
 </html>
