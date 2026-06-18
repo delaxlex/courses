@@ -12,7 +12,7 @@ function logout() {
     sessionStorage.removeItem('user_surname');
     sessionStorage.removeItem('access_token');
     sessionStorage.removeItem('login_time');
-    window.location.href = 'index.html';
+    window.location.href = '../index.html';
 }
 
 // ============================================
@@ -222,3 +222,161 @@ setInterval(() => {
 }, 5 * 60 * 1000);
 
 console.log('🛡️ Защита страницы активна');
+
+// ============================================
+// УПРАВЛЕНИЕ ПАНЕЛЬЮ С АНИМАЦИЕЙ
+// ============================================
+document.addEventListener('DOMContentLoaded', function() {
+    const sidebar = document.getElementById('sidebar');
+    const sidebarOpen = document.getElementById('sidebarOpen');
+    const sidebarClose = document.getElementById('sidebarClose');
+    const mainContent = document.getElementById('mainContent');
+
+    // Создаем оверлей для мобильных
+    const overlay = document.createElement('div');
+    overlay.className = 'sidebar-overlay';
+    document.body.appendChild(overlay);
+
+    // Функция скрытия панели с анимацией
+    function hideSidebar() {
+        // Добавляем класс hidden для анимации
+        sidebar.classList.add('hidden');
+        
+        // Показываем кнопку открытия с анимацией
+        sidebarOpen.classList.remove('hidden-btn');
+        sidebarOpen.classList.add('visible');
+        
+        // Скрываем оверлей
+        overlay.classList.remove('active');
+        
+        // Сохраняем состояние
+        localStorage.setItem('sidebarHidden', 'true');
+        
+        // Блокируем скролл на мобильных при открытой панели
+        document.body.style.overflow = '';
+    }
+
+    // Функция показа панели с анимацией
+    function showSidebar() {
+        // Убираем класс hidden
+        sidebar.classList.remove('hidden');
+        
+        // Прячем кнопку открытия с анимацией
+        sidebarOpen.classList.add('hidden-btn');
+        setTimeout(() => {
+            sidebarOpen.classList.remove('visible');
+            sidebarOpen.classList.remove('hidden-btn');
+        }, 300);
+        
+        // Показываем оверлей на мобильных
+        if (window.innerWidth <= 768) {
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        // Сохраняем состояние
+        localStorage.setItem('sidebarHidden', 'false');
+    }
+
+    // Обработчик закрытия
+    if (sidebarClose) {
+        sidebarClose.addEventListener('click', function(e) {
+            e.stopPropagation();
+            hideSidebar();
+        });
+    }
+
+    // Обработчик открытия
+    if (sidebarOpen) {
+        sidebarOpen.addEventListener('click', function(e) {
+            e.stopPropagation();
+            showSidebar();
+        });
+    }
+
+    // Клик по оверлею - закрываем панель
+    overlay.addEventListener('click', function() {
+        if (!sidebar.classList.contains('hidden')) {
+            hideSidebar();
+        }
+    });
+
+    // Восстанавливаем состояние при загрузке
+    const isHidden = localStorage.getItem('sidebarHidden') === 'true';
+    if (isHidden) {
+        // Сразу скрываем без анимации при загрузке
+        sidebar.classList.add('hidden');
+        sidebarOpen.classList.add('visible');
+        if (window.innerWidth <= 768) {
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    } else {
+        // Показываем с анимацией
+        setTimeout(() => {
+            sidebar.classList.remove('hidden');
+        }, 100);
+    }
+
+    // Закрываем панель при клике вне её (для мобильных)
+    document.addEventListener('click', function(e) {
+        const isMobile = window.innerWidth <= 768;
+        if (!isMobile) return;
+        
+        const isSidebar = sidebar.contains(e.target);
+        const isOpenBtn = sidebarOpen.contains(e.target);
+        const isOverlay = overlay.contains(e.target);
+        
+        if (!isSidebar && !isOpenBtn && !isOverlay && !sidebar.classList.contains('hidden')) {
+            hideSidebar();
+        }
+    });
+
+    // При изменении размера окна
+    let resizeTimeout;
+    window.addEventListener('resize', function() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            const isMobile = window.innerWidth <= 768;
+            const isHidden = sidebar.classList.contains('hidden');
+            
+            if (!isMobile && !isHidden) {
+                // На десктопе если панель открыта - убираем оверлей
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+            
+            if (isMobile && !isHidden) {
+                // На мобильных показываем оверлей
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+            
+            if (isMobile && isHidden) {
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }, 250);
+    });
+
+    // Обработчик для Escape - закрываем панель
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && !sidebar.classList.contains('hidden')) {
+            hideSidebar();
+        }
+    });
+
+    // Функция для проверки, открыта ли панель
+    window.isSidebarOpen = function() {
+        return !sidebar.classList.contains('hidden');
+    };
+
+    // Функция для переключения панели
+    window.toggleSidebar = function() {
+        if (sidebar.classList.contains('hidden')) {
+            showSidebar();
+        } else {
+            hideSidebar();
+        }
+    };
+});
