@@ -1,0 +1,301 @@
+/* ============================================
+   ОБЩИЕ СТИЛИ
+   ============================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+    background: #f5f0eb;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* ============================================
+   ГЛАВНЫЙ КОНТЕЙНЕР - УБРАН ОТСТУП
+   ============================================ */
+.app {
+    display: flex;
+    height: 100vh;
+    gap: 0; /* Убираем gap между панелями */
+    background: #f5f0eb;
+    max-width: 100%; /* Убираем ограничение */
+    margin: 0;
+    padding: 0; /* Убираем padding */
+}
+
+/* ============================================
+   ЛЕВАЯ ПАНЕЛЬ (30%) - У САМОГО КРАЯ
+   ============================================ */
+.sidebar {
+    width: 30%;
+    min-width: 280px;
+    max-width: 400px;
+    background: linear-gradient(180deg, #4a148c 0%, #6a1b9a 40%, #7b1fa2 100%);
+    border-radius: 0; /* Убираем скругление, чтобы была у самого края */
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 0 32px rgba(74, 20, 140, 0.2); /* Тень только справа */
+    position: relative;
+    overflow: hidden;
+    height: 100vh;
+}
+
+/* Декоративный фон для панели */
+.sidebar::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.sidebar-header {
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    z-index: 1;
+}
+
+.sidebar-header h2 {
+    color: white;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+}
+
+.sidebar-header .subtitle {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 14px;
+    margin-top: 4px;
+}
+
+/* ============================================
+   МЕНЮ КНОПОК
+   ============================================ */
+.menu {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 4px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Стиль скролла для меню */
+.menu::-webkit-scrollbar {
+    width: 4px;
+}
+
+.menu::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+.menu::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+}
+
+.menu-item {
+    width: 100%;
+    padding: 14px 18px;
+    margin-bottom: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 14px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Иконка у кнопки Титульный лист */
+.menu-item .icon {
+    font-size: 18px;
+    opacity: 0.7;
+}
+
+/* Эффект при наведении */
+.menu-item:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    color: white;
+}
+
+/* Активная кнопка */
+.menu-item.active {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    font-weight: 600;
+}
+
+/* Индикатор активной кнопки */
+.menu-item.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 20%;
+    height: 60%;
+    width: 3px;
+    background: #ce93d8;
+    border-radius: 0 4px 4px 0;
+}
+
+/* ============================================
+   НИЖНЯЯ ЧАСТЬ ПАНЕЛИ
+   ============================================ */
+.sidebar-footer {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    z-index: 1;
+}
+
+.logout-btn {
+    width: 100%;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.logout-btn:hover {
+    background: rgba(244, 67, 54, 0.2);
+    border-color: rgba(244, 67, 54, 0.3);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(244, 67, 54, 0.2);
+}
+
+/* ============================================
+   ПРАВАЯ ПАНЕЛЬ (70%)
+   ============================================ */
+.content {
+    flex: 1;
+    background: #faf6f0;
+    background: linear-gradient(135deg, #faf6f0 0%, #f5f0e8 100%);
+    border-radius: 0; /* Убираем скругление */
+    padding: 32px 40px;
+    overflow-y: auto;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+    position: relative;
+    height: 100vh;
+}
+
+/* Стиль скролла для контента */
+.content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.content::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.02);
+    border-radius: 10px;
+}
+
+.content::-webkit-scrollbar-thumb {
+    background: rgba(74, 20, 140, 0.15);
+    border-radius: 10px;
+}
+
+.content::-webkit-scrollbar-thumb:hover {
+    background: rgba(74, 20, 140, 0.25);
+}
+
+/* ============================================
+   БЛОКИ С УРОКАМИ
+   ============================================ */
+.lesson-content {
+    display: none;
+    animation: fadeSlideIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.lesson-content.active {
+    display: block;
+}
+
+@keyframes fadeSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.lesson-content h1 {
+    font-size: 32px;
+    color: #2d1b4e;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid rgba(74, 20, 140, 0.1);
+}
+
+.lesson-content .content-body {
+    color: #2d2d2d;
+}
+
+.lesson-content .content-body h2 {
+    font-size: 24px;
+    color: #3d2a5e;
+    margin-bottom: 16px;
+    margin-top: 8px;
+}
+
+.lesson-content .content-body p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #444;
+    margin-bottom: 16px;
+}
+
+.lesson-content .content-body ul {
+    margin: 16px 0 20px 24px;
+    color: #444;
+    line-height: 1.8;
+}
+
+.lesson-content .content-body ul li {
+    margin-bottom: 8px;
+}
+
+/* Информационные блоки */
+.info-box {
+    background: rgba(74, 20, 140, 0.06);
+    border-left: 4px solid #6a1b9a;
+    padding: 16px 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+    color: #2d1b4e;
+    font-size: 15px;
+}
+
+.info-box strong {
+    color: #4a148c;
+}

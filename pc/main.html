@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Образовательный портал</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- БЛОК С ЗАЩИТОЙ (показывается если доступ запрещен) -->
+    <div id="blocked-page" style="display: none;">
+        <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; padding: 20px; text-align: center; background: #f5f0eb; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;">
+            <div style="max-width: 500px; padding: 40px; background: white; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+                <h1 style="color: #721c24; font-size: 48px; margin-bottom: 16px;">🚫</h1>
+                <h2 style="color: #721c24; margin-bottom: 16px;">Доступ запрещен</h2>
+                <p id="blocked-message" style="color: #555; font-size: 16px; line-height: 1.6; margin-bottom: 24px;">Пожалуйста, пройдите авторизацию.</p>
+                <a href="../index.html" style="display: inline-block; padding: 12px 32px; background: #6a1b9a; color: white; text-decoration: none; border-radius: 12px; font-weight: 500; transition: all 0.3s ease;">Вернуться на главную</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ОСНОВНОЙ КОНТЕНТ (показывается если доступ разрешен) -->
+    <div id="app-content" style="display: none;">
+        <div class="app">
+            <!-- Левая панель с уроками -->
+            <nav class="sidebar">
+                <div class="sidebar-header">
+                    <h2>📚 Уроки</h2>
+                    <p class="subtitle">Выберите раздел</p>
+                </div>
+                
+                <div class="menu">
+                    <button class="menu-item active" data-lesson="0">
+                        <span class="icon">📄</span>
+                        Титульный лист
+                    </button>
+                    <button class="menu-item" data-lesson="1">Урок 1</button>
+                    <button class="menu-item" data-lesson="2">Урок 2</button>
+                    <button class="menu-item" data-lesson="3">Урок 3</button>
+                    <button class="menu-item" data-lesson="4">Урок 4</button>
+                    <button class="menu-item" data-lesson="5">Урок 5</button>
+                    <button class="menu-item" data-lesson="6">Урок 6</button>
+                    <button class="menu-item" data-lesson="7">Урок 7</button>
+                    <button class="menu-item" data-lesson="8">Урок 8</button>
+                    <button class="menu-item" data-lesson="9">Урок 9</button>
+                    <button class="menu-item" data-lesson="10">Урок 10</button>
+                    <button class="menu-item" data-lesson="11">Урок 11</button>
+                    <button class="menu-item" data-lesson="12">Урок 12</button>
+                    <button class="menu-item" data-lesson="13">Урок 13</button>
+                    <button class="menu-item" data-lesson="14">Урок 14</button>
+                </div>
+                
+                <div class="sidebar-footer">
+                    <button class="logout-btn" onclick="logout()">🚪 Выйти</button>
+                </div>
+            </nav>
+
+            <!-- Правая панель с контентом -->
+            <main class="content">
+                <!-- Блоки с материалами -->
+                <div class="lesson-content" id="lesson-0">
+                    <h1>📄 Титульный лист</h1>
+                    <div class="content-body">
+                        <h2>Добро пожаловать на образовательный портал!</h2>
+                        <p>Здесь вы найдете все необходимые материалы для обучения.</p>
+                        <p>Выберите урок из меню слева, чтобы начать изучение.</p>
+                        <div class="info-box">
+                            <strong>📌 Всего уроков:</strong> 14
+                        </div>
+                        <div class="info-box">
+                            <strong>📊 Прогресс:</strong> 0%
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lesson-content" id="lesson-1">
+                    <h1>📚 Урок 1</h1>
+                    <div class="content-body">
+                        <h2>Введение в тему</h2>
+                        <p>Здесь будет текст первого урока...</p>
+                        <ul>
+                            <li>Пункт 1</li>
+                            <li>Пункт 2</li>
+                            <li>Пункт 3</li>
+                        </ul>
+                        <div class="info-box">
+                            <strong>⏱ Время изучения:</strong> 15 минут
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lesson-content" id="lesson-2">
+                    <h1>📚 Урок 2</h1>
+                    <div class="content-body">
+                        <h2>Основы</h2>
+                        <p>Содержание второго урока...</p>
+                        <div class="info-box">
+                            <strong>⏱ Время изучения:</strong> 20 минут
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lesson-content" id="lesson-3">
+                    <h1>📚 Урок 3</h1>
+                    <div class="content-body">
+                        <h2>Продвинутые техники</h2>
+                        <p>Содержание третьего урока...</p>
+                    </div>
+                </div>
+
+                <div class="lesson-content" id="lesson-4">
+                    <h1>📚 Урок 4</h1>
+                    <div class="content-body">
+                        <h2>Практика</h2>
+                        <p>Содержание четвертого урока...</p>
+                    </div>
+                </div>
+
+                <div class="lesson-content" id="lesson-5">
+                    <h1>📚 Урок 5</h1>
+                    <div class="content-body">
+                        <h2>Закрепление</h2>
+                        <p>Содержание пятого урока...</p>
+                    </div>
+                </div>
+
+                <div class="lesson-content" id="lesson-6">
+                    <h1>📚 Урок 6</h1>
+                    <div class="content-body">
+                        <h2>Новая тема</h2>
+                        <p>Содержание шестого урока...</p>
+                    </div>
+                </div>
+
+                <div class="lesson-content" id="lesson-7">
+                    <h1>📚 Урок 7</h1>
+                    <div class="content-body">
+                        <h2>Углубленное изучение</h2>
+                        <p>Содержание седьмого урока...</p>
+                    </div>
+                </div>
+
+                <div class="lesson-content" id="lesson-8">
+                    <h1>📚 Урок 8</h1>
+                    <div class="content-body">
+                        <h2>Работа с данными</h2>
+                        <p>Содержание восьмого урока...</p>
+                    </div>
+                </div>
+
+                <div class="lesson-content" id="lesson-9">
+                    <h1>📚 Урок 9</h1>
+                    <div class="content-body">
+                        <h2>Анализ</h2>
+                        <p>Содержание девятого урока...</p>
+                    </div>
+                </div>
+
+                <div class="lesson-content" id="lesson-10">
+                    <h1>📚 Урок 10</h1>
+                    <div class="content-body">
+                        <h2>Синтез знаний</h2>
+                        <p>Содержание десятого урока...</p>
+                    </div>
+                </div>
+
+                <div class="lesson-content" id="lesson-11">
+                    <h1>📚 Урок 11</h1>
+                    <div class="content-body">
+                        <h2>Проектная работа</h2>
+                        <p>Содержание одиннадцатого урока...</p>
+                    </div>
+                </div>
+
+                <div class="lesson-content" id="lesson-12">
+                    <h1>📚 Урок 12</h1>
+                    <div class="content-body">
+                        <h2>Эксперименты</h2>
+                        <p>Содержание двенадцатого урока...</p>
+                    </div>
+                </div>
+
+                <div class="lesson-content" id="lesson-13">
+                    <h1>📚 Урок 13</h1>
+                    <div class="content-body">
+                        <h2>Финальная подготовка</h2>
+                        <p>Содержание тринадцатого урока...</p>
+                    </div>
+                </div>
+
+                <div class="lesson-content" id="lesson-14">
+                    <h1>📚 Урок 14</h1>
+                    <div class="content-body">
+                        <h2>Итоговое занятие</h2>
+                        <p>Содержание четырнадцатого урока...</p>
+                        <div class="info-box">
+                            <strong>🎯 Цель урока:</strong> Повторение всего материала
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
