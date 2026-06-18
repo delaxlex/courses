@@ -380,3 +380,37 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 });
+
+(function forceDesktop() {
+    // Проверяем, является ли устройство мобильным
+    const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|Windows Phone|Opera Mini|IEMobile|webOS/i.test(navigator.userAgent);
+    
+    if (isMobile) {
+        // Устанавливаем ширину для десктопного отображения
+        const viewport = document.querySelector('meta[name="viewport"]');
+        if (viewport) {
+            viewport.content = 'width=1024, initial-scale=1.0, user-scalable=yes';
+        }
+        
+        // Добавляем класс для body
+        document.body.classList.add('force-desktop');
+        
+        // Блокируем двойной тап для масштабирования
+        document.addEventListener('touchend', function(e) {
+            if (e.target.closest('.menu-item, .logout-btn, .sidebar-close, .sidebar-open')) {
+                e.preventDefault();
+                e.target.click();
+            }
+        }, { passive: false });
+        
+        // Отключаем pinch-to-zoom
+        document.addEventListener('gesturestart', function(e) {
+            e.preventDefault();
+        }, { passive: false });
+        
+        // Принудительно устанавливаем масштаб
+        document.documentElement.style.zoom = '1';
+        
+        console.log('📱 Мобильное устройство обнаружено, включена десктопная версия');
+    }
+})();
