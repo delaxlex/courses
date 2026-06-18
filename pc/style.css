@@ -15,37 +15,36 @@ body {
 }
 
 /* ============================================
-   ГЛАВНЫЙ КОНТЕЙНЕР - УБРАН ОТСТУП
+   ГЛАВНЫЙ КОНТЕЙНЕР
    ============================================ */
 .app {
     display: flex;
     height: 100vh;
-    gap: 0; /* Убираем gap между панелями */
+    gap: 0;
     background: #f5f0eb;
-    max-width: 100%; /* Убираем ограничение */
+    max-width: 100%;
     margin: 0;
-    padding: 0; /* Убираем padding */
+    padding: 0;
 }
 
 /* ============================================
-   ЛЕВАЯ ПАНЕЛЬ (30%) - У САМОГО КРАЯ
+   ЛЕВАЯ ПАНЕЛЬ (30%)
    ============================================ */
 .sidebar {
     width: 30%;
     min-width: 280px;
     max-width: 400px;
     background: linear-gradient(180deg, #4a148c 0%, #6a1b9a 40%, #7b1fa2 100%);
-    border-radius: 0; /* Убираем скругление, чтобы была у самого края */
+    border-radius: 0;
     padding: 24px 20px;
     display: flex;
     flex-direction: column;
-    box-shadow: 2px 0 32px rgba(74, 20, 140, 0.2); /* Тень только справа */
+    box-shadow: 2px 0 32px rgba(74, 20, 140, 0.2);
     position: relative;
     overflow: hidden;
     height: 100vh;
 }
 
-/* Декоративный фон для панели */
 .sidebar::before {
     content: '';
     position: absolute;
@@ -72,7 +71,6 @@ body {
     letter-spacing: -0.5px;
 }
 
-
 .sidebar-header .subtitle {
     color: rgba(255, 255, 255, 0.6);
     font-size: 14px;
@@ -90,7 +88,6 @@ body {
     z-index: 1;
 }
 
-/* Стиль скролла для меню */
 .menu::-webkit-scrollbar {
     width: 4px;
 }
@@ -125,13 +122,11 @@ body {
     overflow: hidden;
 }
 
-/* Иконка у кнопки Титульный лист */
 .menu-item .icon {
     font-size: 18px;
     opacity: 0.7;
 }
 
-/* Эффект при наведении */
 .menu-item:hover {
     background: rgba(255, 255, 255, 0.15);
     transform: translateY(-2px);
@@ -139,7 +134,6 @@ body {
     color: white;
 }
 
-/* Активная кнопка */
 .menu-item.active {
     background: rgba(255, 255, 255, 0.2);
     color: white;
@@ -148,7 +142,6 @@ body {
     font-weight: 600;
 }
 
-/* Индикатор активной кнопки */
 .menu-item.active::before {
     content: '';
     position: absolute;
@@ -200,7 +193,7 @@ body {
     flex: 1;
     background: #faf6f0;
     background: linear-gradient(135deg, #faf6f0 0%, #f5f0e8 100%);
-    border-radius: 0; /* Убираем скругление */
+    border-radius: 0;
     padding: 32px 40px;
     overflow-y: auto;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
@@ -208,7 +201,6 @@ body {
     height: 100vh;
 }
 
-/* Стиль скролла для контента */
 .content::-webkit-scrollbar {
     width: 6px;
 }
@@ -269,11 +261,18 @@ body {
     margin-top: 8px;
 }
 
+.lesson-content .content-body h3 {
+    font-size: 20px;
+    color: #3d2a5e;
+    margin-bottom: 12px;
+    margin-top: 6px;
+}
+
 .lesson-content .content-body p {
-    font-size: 16px;
+    font-size: 20px;
     line-height: 1.8;
     color: #444;
-    margin-bottom: 16px;
+    margin-bottom: 10px;
 }
 
 .lesson-content .content-body ul {
@@ -286,7 +285,9 @@ body {
     margin-bottom: 8px;
 }
 
-/* Информационные блоки */
+/* ============================================
+   ИНФОРМАЦИОННЫЕ БЛОКИ
+   ============================================ */
 .info-box {
     background: rgba(74, 20, 140, 0.06);
     border-left: 4px solid #6a1b9a;
@@ -300,6 +301,10 @@ body {
 .info-box strong {
     color: #4a148c;
 }
+
+/* ============================================
+   ИНФОРМАЦИОННЫЙ БЛОК С КАРТИНКОЙ
+   ============================================ */
 .info-block {
     display: flex;
     gap: 30px;
@@ -329,7 +334,6 @@ body {
     margin-bottom: 8px;
 }
 
-/* Что не входит в курс */
 .info-not-included {
     margin: 16px 0 12px 0;
 }
@@ -369,31 +373,9 @@ body {
     font-weight: 500;
 }
 
-/* Преподаватель */
-.teacher-block {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 12px;
-    padding-top: 12px;
-    border-top: 1px solid rgba(74, 20, 140, 0.08);
-}
-
-.teacher-label {
-    font-size: 15px;
-    color: #2d1b4e;
-}
-
-.teacher-name {
-    font-size: 15px;
-    color: #2d1b4e;
-    font-weight: 600;
-}
-
-/* Картинка */
 .info-image {
     flex-shrink: 0;
-    width: 180px;
+    width: 240px;
     height: auto;
 }
 
@@ -405,15 +387,48 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
 }
 
-/* Адаптив для маленьких экранов */
-@media (max-width: 768px) {
-    .info-block {
-        flex-direction: column-reverse;
-        align-items: center;
-        padding: 20px;
-    }
-    
-    .info-image {
-        width: 140px;
-    }
+/* ============================================
+   КАРТИНКА СЛЕВА, ТЕКСТ СПРАВА (ОТ ВЕРХНЕГО КРАЯ)
+   ============================================ */
+
+.image-text-row {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;  /* ← Текст от верхнего края картинки */
+    margin: 16px 0 24px 0;
+}
+
+.image-left-col {
+    flex-shrink: 0;
+    width: 300px;  /* ← Задайте нужный размер */
+}
+
+.image-left-col img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    display: block;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.image-left-col img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 32px rgba(74, 20, 140, 0.15);
+}
+
+.text-right-col {
+    flex: 1;
+    padding-top: 0;  /* ← Убедитесь, что нет отступа сверху */
+}
+
+.text-right-col p {
+    font-size: 16px !important;
+    line-height: 1.8;
+    color: #444;
+    margin: 0 !important;
+}
+
+.les1 {
+    margin-bottom: 4px !important;
 }
