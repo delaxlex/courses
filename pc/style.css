@@ -72,6 +72,7 @@ body {
     letter-spacing: -0.5px;
 }
 
+
 .sidebar-header .subtitle {
     color: rgba(255, 255, 255, 0.6);
     font-size: 14px;
@@ -298,4 +299,121 @@ body {
 
 .info-box strong {
     color: #4a148c;
+}
+.info-block {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+    background: #faf6f0;
+    border-radius: 16px;
+    padding: 24px 28px;
+    margin: 20px 0 24px 0;
+    border: 1px solid rgba(74, 20, 140, 0.06);
+}
+
+.info-text {
+    flex: 1;
+}
+
+.info-text-item {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #444;
+    margin-bottom: 16px;
+}
+
+.info-text p {
+    font-size: 15px;
+    line-height: 1.7;
+    color: #444;
+    margin-bottom: 8px;
+}
+
+/* Что не входит в курс */
+.info-not-included {
+    margin: 16px 0 12px 0;
+}
+
+.not-included-title {
+    font-size: 16px;
+    color: #2d1b4e;
+    margin-bottom: 6px;
+}
+
+.not-included-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.not-included-list li {
+    font-size: 15px;
+    color: #444;
+    line-height: 1.8;
+    padding-left: 24px;
+    position: relative;
+}
+
+.not-included-list li::before {
+    content: '☑';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #6a1b9a;
+}
+
+.comfort-text {
+    font-size: 15px;
+    color: #2d1b4e;
+    margin-top: 12px;
+    font-weight: 500;
+}
+
+/* Преподаватель */
+.teacher-block {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(74, 20, 140, 0.08);
+}
+
+.teacher-label {
+    font-size: 15px;
+    color: #2d1b4e;
+}
+
+.teacher-name {
+    font-size: 15px;
+    color: #2d1b4e;
+    font-weight: 600;
+}
+
+/* Картинка */
+.info-image {
+    flex-shrink: 0;
+    width: 180px;
+    height: auto;
+}
+
+.info-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    display: block;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+/* Адаптив для маленьких экранов */
+@media (max-width: 768px) {
+    .info-block {
+        flex-direction: column-reverse;
+        align-items: center;
+        padding: 20px;
+    }
+    
+    .info-image {
+        width: 140px;
+    }
 }
