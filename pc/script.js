@@ -239,42 +239,33 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Функция скрытия панели с анимацией
     function hideSidebar() {
-        // Добавляем класс hidden для анимации
         sidebar.classList.add('hidden');
         
-        // Показываем кнопку открытия с анимацией
+        // Показываем кнопку открытия слева с анимацией
         sidebarOpen.classList.remove('hidden-btn');
         sidebarOpen.classList.add('visible');
         
-        // Скрываем оверлей
         overlay.classList.remove('active');
-        
-        // Сохраняем состояние
         localStorage.setItem('sidebarHidden', 'true');
-        
-        // Блокируем скролл на мобильных при открытой панели
         document.body.style.overflow = '';
     }
 
     // Функция показа панели с анимацией
     function showSidebar() {
-        // Убираем класс hidden
         sidebar.classList.remove('hidden');
         
-        // Прячем кнопку открытия с анимацией
+        // Прячем кнопку открытия
         sidebarOpen.classList.add('hidden-btn');
         setTimeout(() => {
             sidebarOpen.classList.remove('visible');
             sidebarOpen.classList.remove('hidden-btn');
         }, 300);
         
-        // Показываем оверлей на мобильных
         if (window.innerWidth <= 768) {
             overlay.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
         
-        // Сохраняем состояние
         localStorage.setItem('sidebarHidden', 'false');
     }
 
@@ -304,7 +295,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Восстанавливаем состояние при загрузке
     const isHidden = localStorage.getItem('sidebarHidden') === 'true';
     if (isHidden) {
-        // Сразу скрываем без анимации при загрузке
         sidebar.classList.add('hidden');
         sidebarOpen.classList.add('visible');
         if (window.innerWidth <= 768) {
@@ -312,7 +302,6 @@ document.addEventListener('DOMContentLoaded', function() {
             document.body.style.overflow = '';
         }
     } else {
-        // Показываем с анимацией
         setTimeout(() => {
             sidebar.classList.remove('hidden');
         }, 100);
@@ -341,13 +330,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const isHidden = sidebar.classList.contains('hidden');
             
             if (!isMobile && !isHidden) {
-                // На десктопе если панель открыта - убираем оверлей
                 overlay.classList.remove('active');
                 document.body.style.overflow = '';
             }
             
             if (isMobile && !isHidden) {
-                // На мобильных показываем оверлей
                 overlay.classList.add('active');
                 document.body.style.overflow = 'hidden';
             }
@@ -359,19 +346,18 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 250);
     });
 
-    // Обработчик для Escape - закрываем панель
+    // Закрытие по Escape
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && !sidebar.classList.contains('hidden')) {
             hideSidebar();
         }
     });
 
-    // Функция для проверки, открыта ли панель
+    // Функции для внешнего использования
     window.isSidebarOpen = function() {
         return !sidebar.classList.contains('hidden');
     };
 
-    // Функция для переключения панели
     window.toggleSidebar = function() {
         if (sidebar.classList.contains('hidden')) {
             showSidebar();
@@ -381,21 +367,20 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 });
 
+// ============================================
+// ПРИНУДИТЕЛЬНАЯ ДЕСКТОПНАЯ ВЕРСИЯ
+// ============================================
 (function forceDesktop() {
-    // Проверяем, является ли устройство мобильным
     const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|Windows Phone|Opera Mini|IEMobile|webOS/i.test(navigator.userAgent);
     
     if (isMobile) {
-        // Устанавливаем ширину для десктопного отображения
         const viewport = document.querySelector('meta[name="viewport"]');
         if (viewport) {
             viewport.content = 'width=1024, initial-scale=1.0, user-scalable=yes';
         }
         
-        // Добавляем класс для body
         document.body.classList.add('force-desktop');
         
-        // Блокируем двойной тап для масштабирования
         document.addEventListener('touchend', function(e) {
             if (e.target.closest('.menu-item, .logout-btn, .sidebar-close, .sidebar-open')) {
                 e.preventDefault();
@@ -403,12 +388,10 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }, { passive: false });
         
-        // Отключаем pinch-to-zoom
         document.addEventListener('gesturestart', function(e) {
             e.preventDefault();
         }, { passive: false });
         
-        // Принудительно устанавливаем масштаб
         document.documentElement.style.zoom = '1';
         
         console.log('📱 Мобильное устройство обнаружено, включена десктопная версия');
