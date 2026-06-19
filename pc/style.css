@@ -510,7 +510,7 @@ body {
 .sidebar-open {
     position: fixed;
     top: 16px;
-    right: 24px;
+    left: 16px;  /* ← Изменено с right на left */
     z-index: 9999;
     width: 48px;
     height: 48px;
@@ -551,6 +551,7 @@ body {
     width: 22px;
     height: 22px;
 }
+
 
 /* ============================================
    КНОПКА ЗАКРЫТИЯ ВНУТРИ ПАНЕЛИ
@@ -728,93 +729,5 @@ body {
 
     .sidebar:not(.hidden) {
         animation: slideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-}
-
-/* ============================================
-   ПРИНУДИТЕЛЬНАЯ ДЕСКТОПНАЯ ВЕРСИЯ ДЛЯ МОБИЛЬНЫХ
-   ============================================ */
-body.force-desktop .sidebar {
-    position: relative !important;
-    width: 30% !important;
-    min-width: 280px !important;
-    max-width: 400px !important;
-    height: 100vh !important;
-    transform: none !important;
-    display: flex !important;
-    padding: 24px 20px !important;
-    border-radius: 0 !important;
-    box-shadow: 2px 0 32px rgba(74, 20, 140, 0.2) !important;
-    z-index: auto !important;
-}
-
-body.force-desktop .sidebar.hidden {
-    width: 0 !important;
-    min-width: 0 !important;
-    max-width: 0 !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    opacity: 0;
-    transform: translateX(-30px);
-    overflow: hidden;
-    border: none;
-    flex: 0 0 0;
-    pointer-events: none;
-}
-
-body.force-desktop .sidebar-open {
-    display: none !important;
-}
-
-body.force-desktop .sidebar-overlay {
-    display: none !important;
-}
-
-body.force-desktop .app {
-    display: flex !important;
-    height: 100vh !important;
-    gap: 0 !important;
-}
-
-body.force-desktop .content {
-    flex: 1 !important;
-    height: 100vh !important;
-    overflow-y: auto !important;
-}
-
-/* Отключаем все мобильные медиа-запросы */
-@media (max-width: 768px) {
-    body.force-desktop .sidebar {
-        position: relative !important;
-        left: auto !important;
-        right: auto !important;
-        top: auto !important;
-        bottom: auto !important;
-        width: 30% !important;
-        max-width: 400px !important;
-        transform: none !important;
-        border-radius: 0 !important;
-    }
-    
-    body.force-desktop .sidebar.hidden {
-        width: 0 !important;
-        max-width: 0 !important;
-        padding: 0 !important;
-        transform: translateX(-30px) !important;
-    }
-    
-    body.force-desktop .sidebar-open {
-        display: none !important;
-    }
-    
-    body.force-desktop .sidebar-overlay {
-        display: none !important;
-    }
-    
-    body.force-desktop .sidebar-close {
-        display: flex !important;
-        position: absolute !important;
-        top: 12px !important;
-        right: 12px !important;
     }
 }
