@@ -737,3 +737,10 @@ hr {
     border: none; 
     background-color: gray;
 }
+
+
+li {
+    margin-left: 20px;
+    margin-bottom: 8px;
+    font-style: italic;
+}
