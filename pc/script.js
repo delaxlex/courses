@@ -198,7 +198,7 @@ function initNavigation() {
     
     if (lessonParam !== null) {
         const lessonId = parseInt(lessonParam);
-        if (lessonId >= 0 && lessonId <= 15) {
+        if (lessonId >= 0 && lessonId <= 16) {
             switchLesson(lessonId);
             return;
         }
